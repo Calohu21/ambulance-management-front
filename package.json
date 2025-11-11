@@ -1,6 +1,19 @@
 {
   "name": "ambulance-management-front",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Sistema web de gestión integral para empresas de ambulancias",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Calohu21/ambulance-management-front"
+  },
+  "keywords": [
+    "ambulance",
+    "management",
+    "healthcare",
+    "emergency-services"
+  ],
+  "author": "Carmelo Lozano",
+  "license": "UNLICENSED",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
