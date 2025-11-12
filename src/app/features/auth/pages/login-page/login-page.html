@@ -1,14 +1,60 @@
-<input class="input validator" type="email" required placeholder="mail@site.com" />
-<input
-  type="password"
-  class="input validator"
-  required
-  placeholder="Password"
-  minlength="8"
-  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-  title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
-/>
-<p class="validator-hint">
-  Must be more than 8 characters, including
-  <br />At least one number <br />At least one lowercase letter <br />At least one uppercase letter
-</p>
+<div class="min-h-screen flex items-center justify-center bg-base-200">
+  <div class="card w-full max-w-md bg-base-100 shadow-xl">
+    <div class="card-body">
+      <!-- Logo y título -->
+      <div class="text-center mb-6">
+        <div class="text-4xl mb-2">
+          <i class="fas fa-ambulance text-primary"></i>
+        </div>
+        <h1 class="text-2xl font-bold">Sistema de Ambulancias</h1>
+        <p class="text-base-content/60">Inicia sesión para continuar</p>
+      </div>
+
+      <!-- Formulario -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- Email -->
+        <app-form-field label="Email" [required]="true" [error]="getFieldError('username')">
+          <input
+            type="text"
+            formControlName="username"
+            class="input input-bordered w-full"
+            placeholder="username"
+            autocomplete="username"
+          />
+        </app-form-field>
+
+        <!-- Password -->
+        <app-form-field label="Contraseña" [required]="true" [error]="getFieldError('password')">
+          <div class="relative">
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              formControlName="password"
+              class="input input-bordered w-full pr-10"
+              placeholder="••••••••"
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              class="btn btn-ghost btn-sm absolute right-0 top-0 h-full"
+              (click)="togglePasswordVisibility()"
+            >
+              <i [class]="showPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
+        </app-form-field>
+
+        <!-- Botón submit -->
+        <div class="mt-6">
+          <button type="submit" class="btn btn-primary w-full">
+            Ingresar
+            <!--            [disabled]="loginForm.invalid || isLoading()"-->
+            @if (isLoading()) {
+              <span class="loading loading-spinner"></span>
+              {{ isLoading() ? 'Iniciando...' : 'Iniciar Sesión' }}
+            }
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
