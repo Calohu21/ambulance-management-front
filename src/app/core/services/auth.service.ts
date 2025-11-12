@@ -21,6 +21,7 @@ export class AuthService {
   login(credentials: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(AUTH_ENDPOINTS.LOGIN, credentials).pipe(
       tap((response) => this.handleAuthSuccess(response)),
+      tap((resp) => console.log(resp)),
       catchError((err) => {
         console.error('Login error:', err);
         return throwError(() => err);

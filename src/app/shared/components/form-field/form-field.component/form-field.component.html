@@ -1,0 +1,31 @@
+<div class="form-control w-full mb-4">
+  <!-- Label -->
+  <label class="label">
+    <span class="label-text">
+      {{ label() }}
+      @if (required()) {
+        <span class="text-error ml-1">*</span>
+      }
+    </span>
+  </label>
+
+  <!-- Input proyectado -->
+  <ng-content></ng-content>
+  <!-- Mensaje de error -->
+  @if (error()) {
+    <label class="label">
+      <span class="label-text-alt text-error">
+        <i class="fas fa-exclamation-circle mr-1"></i>
+        {{ error() }}
+      </span>
+    </label>
+  }
+  <!-- Hint opcional -->
+  @if (hint() && !error()) {
+    <label class="label">
+      <span class="label-text-alt text-base-content/60">
+        {{ hint() }}
+      </span>
+    </label>
+  }
+</div>
