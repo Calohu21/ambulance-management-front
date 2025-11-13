@@ -10,7 +10,7 @@
       </div>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center">
-        <app-form-field label="Username" [required]="true" [error]="usernameError()">
+        <app-form-field label="Username" [required]="true" [error]="getFieldError('username')">
           <div class="relative w-80">
             <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
               <svg
@@ -18,7 +18,6 @@
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
-                <!--suppress HtmlDeprecatedAttribute -->
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"
@@ -42,7 +41,7 @@
           </div>
         </app-form-field>
 
-        <app-form-field label="Contraseña" [required]="true" [error]="passwordError()">
+        <app-form-field label="Contraseña" [required]="true" [error]="getFieldError('password')">
           <div class="relative w-80">
             <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
               <svg
@@ -50,7 +49,6 @@
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
-                <!--suppress HtmlDeprecatedAttribute -->
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"
@@ -66,7 +64,6 @@
               </svg>
             </div>
             <input
-              [type]="showPassword() ? 'text' : 'password'"
               formControlName="password"
               class="input validator input-bordered w-full pl-10 relative"
               placeholder="••••••••"
@@ -76,10 +73,7 @@
             <button
               type="button"
               class="btn btn-ghost btn-sm absolute right-0 top-0 h-full"
-              (click)="togglePasswordVisibility()"
-            >
-              <i [class]="showPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-            </button>
+            ></button>
           </div>
         </app-form-field>
 
