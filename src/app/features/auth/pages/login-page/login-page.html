@@ -1,5 +1,5 @@
 <div class="min-h-screen flex items-center justify-center bg-base-200">
-  <div class="card w-full max-w-md bg-base-100 shadow-xl">
+  <div class="card w-full max-w-md bg-base-100/30 shadow-2xl">
     <div class="card-body">
       <!-- Logo y título -->
       <div class="text-center mb-6">
@@ -11,27 +11,69 @@
       </div>
 
       <!-- Formulario -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center">
         <!-- Email -->
-        <app-form-field label="Email" [required]="true" [error]="getFieldError('username')">
-          <input
-            type="text"
-            formControlName="username"
-            class="input input-bordered w-full"
-            placeholder="username"
-            autocomplete="username"
-          />
+        <app-form-field label="Username" [required]="true" [error]="getFieldError('username')">
+          <div class="relative w-80">
+            <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
+              <svg
+                class="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </g>
+              </svg>
+            </div>
+            <input
+              type="text"
+              formControlName="username"
+              class="input validator input-bordered w-full pl-10 relative"
+              placeholder="username"
+              autocomplete="username"
+              minlength="4"
+            />
+          </div>
         </app-form-field>
 
         <!-- Password -->
         <app-form-field label="Contraseña" [required]="true" [error]="getFieldError('password')">
-          <div class="relative">
+          <div class="relative w-80">
+            <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
+              <svg
+                class="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+                  ></path>
+                  <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                </g>
+              </svg>
+            </div>
             <input
               [type]="showPassword() ? 'text' : 'password'"
               formControlName="password"
-              class="input input-bordered w-full pr-10"
+              class="input validator input-bordered w-full pl-10 relative"
               placeholder="••••••••"
               autocomplete="current-password"
+              minlength="6"
             />
             <button
               type="button"
@@ -45,9 +87,16 @@
 
         <!-- Botón submit -->
         <div class="mt-6">
-          <button type="submit" class="btn btn-primary w-full">
+          @if (isError()) {
+            <div
+              class="tooltip tooltip-open tooltip-error flex items-center"
+              data-tip="Usuario o contraseña no encontrado"
+            ></div>
+          }
+          <button type="submit" class="btn btn-primary w-60">
             Ingresar
             <!--            [disabled]="loginForm.invalid || isLoading()"-->
+
             @if (isLoading()) {
               <span class="loading loading-spinner"></span>
               {{ isLoading() ? 'Iniciando...' : 'Iniciar Sesión' }}

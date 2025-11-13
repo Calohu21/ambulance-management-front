@@ -1,8 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@core/services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component/form-field.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -13,9 +15,11 @@ import { FormFieldComponent } from '@shared/components/form-field/form-field.com
 export class LoginPage {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
+  private destroyRef = inject(DestroyRef);
 
   showPassword = signal<boolean>(false);
   isLoading = signal<boolean>(false);
+  isError = signal<boolean>(false);
 
   loginForm: FormGroup = this.fb.group({
     username: ['', [Validators.required, Validators.minLength(4)]],
@@ -55,18 +59,26 @@ export class LoginPage {
     }
 
     this.isLoading.set(true);
+    this.isError.set(false);
     const { username, password } = this.loginForm.value;
 
-    this.authService.login({ username, password }).subscribe({
-      next: () => {
-        console.log('Login realizado');
-      },
-      error: () => {
-        this.isLoading.set(false);
-      },
-      complete: () => {
-        this.isLoading.set(false);
-      },
-    });
+    this.authService
+      .login({ username, password })
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.isError.set(false);
+        },
+        error: () => {
+          this.isError.set(true);
+          this.isLoading.set(false);
+          timer(3000)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.isError.set(false));
+        },
+        complete: () => {
+          this.isLoading.set(false);
+        },
+      });
   }
 }

@@ -2,3 +2,11 @@
 @plugin "daisyui" {
   themes: corporate --default;
 }
+
+@utility btn {
+  @apply rounded-md;
+}
+
+:root {
+  --color-primary: #37619c;
+}
