@@ -1,5 +1,4 @@
 <div class="form-control w-full mb-4">
-  <!-- Label -->
   <label class="label">
     <span class="label-text">
       {{ label() }}
@@ -9,18 +8,19 @@
     </span>
   </label>
 
-  <!-- Input proyectado con clase condicional para padding -->
   <ng-content></ng-content>
-  <!-- Mensaje de error -->
-  @if (error()) {
-    <label class="label">
-      <span class="label-text-alt text-error">
-        <i class="fas fa-exclamation-circle mr-1"></i>
-        {{ error() }}
-      </span>
-    </label>
-  }
-  <!-- Hint opcional -->
+
+  <div class="h-3">
+    @if (error()) {
+      <div class="label py-0 animate-fade-in">
+        <span class="label-text-alt text-error text-sm flex items-center">
+          <i class="fas fa-exclamation-circle mr-1"></i>
+          {{ error() }}
+        </span>
+      </div>
+    }
+  </div>
+
   @if (hint() && !error()) {
     <label class="label">
       <span class="label-text-alt text-base-content/60">

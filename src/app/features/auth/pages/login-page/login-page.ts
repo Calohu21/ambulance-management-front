@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, input, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@core/services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -75,6 +75,10 @@ export class LoginPage {
           timer(3000)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(() => this.isError.set(false));
+          this.loginForm.reset({
+            username: '',
+            password: '',
+          });
         },
         complete: () => {
           this.isLoading.set(false);

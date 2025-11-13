@@ -10,3 +10,11 @@
 :root {
   --color-primary: #37619c;
 }
+
+::placeholder {
+  color: #848993;
+  opacity: 1;
+}
+
+
+
