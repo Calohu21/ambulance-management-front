@@ -1,4 +1,8 @@
-import { Role } from '@core/models/auth.model';
+export enum Role {
+  ADMIN = 'ADMIN',
+  EMPLEADO = 'EMPLEADO',
+  CONTABLE = 'CONTABLE',
+}
 
 export interface User {
   id: number;

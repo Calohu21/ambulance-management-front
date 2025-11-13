@@ -2,7 +2,6 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '@core/services/auth.service';
 import {
-  FormControl,
   FormGroup,
   NonNullableFormBuilder,
   ReactiveFormsModule,
@@ -13,23 +12,7 @@ import { FormFieldComponent } from '@shared/components/form-field/form-field.com
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, EMPTY, finalize, Observable, timer } from 'rxjs';
 import { Router } from '@angular/router';
-
-interface LoginForm {
-  username: FormControl<string>;
-  password: FormControl<string>;
-}
-
-interface HttpError {
-  status: number;
-  message: string;
-}
-
-// Constantes de configuración
-const LOGIN_CONFIG = {
-  USERNAME_MIN_LENGTH: 4,
-  USERNAME_MAX_LENGTH: 50,
-  ERROR_DISMISS_DELAY: 3000,
-} as const;
+import { HttpError, LOGIN_CONFIG, LoginForm } from '@features/auth/models/auth.model';
 
 @Component({
   selector: 'app-login-page',

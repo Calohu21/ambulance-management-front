@@ -10,5 +10,4 @@ export class FormFieldComponent {
   label = input<string>();
   required = input<boolean>();
   error = input<string>();
-  hint = input<string>();
 }

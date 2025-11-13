@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthResponse, LoginRequest } from '@core/models/auth.model';
+import { AuthResponse, LoginRequest } from '@features/auth/models/auth.model';
 import { AUTH_ENDPOINTS, STORAGE_KEYS } from '@core/constants/api.constants';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { StorageService } from '@core/services/storage.service';
