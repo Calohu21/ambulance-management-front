@@ -1,7 +1,6 @@
 <div class="min-h-screen flex items-center justify-center bg-base-200">
   <div class="card w-full max-w-md bg-base-100/30 shadow-2xl">
     <div class="card-body">
-      <!-- Logo y título -->
       <div class="text-center mb-6">
         <div class="text-4xl mb-2">
           <i class="fas fa-ambulance text-primary"></i>
@@ -10,10 +9,8 @@
         <p class="text-base-content/60">Inicia sesión para continuar</p>
       </div>
 
-      <!-- Formulario -->
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center">
-        <!-- Username -->
-        <app-form-field label="Username" [required]="true" [error]="getFieldError('username')">
+        <app-form-field label="Username" [required]="true" [error]="usernameError()">
           <div class="relative w-80">
             <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
               <svg
@@ -21,6 +18,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
+                <!--suppress HtmlDeprecatedAttribute -->
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"
@@ -44,8 +42,7 @@
           </div>
         </app-form-field>
 
-        <!-- Password -->
-        <app-form-field label="Contraseña" [required]="true" [error]="getFieldError('password')">
+        <app-form-field label="Contraseña" [required]="true" [error]="passwordError()">
           <div class="relative w-80">
             <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
               <svg
@@ -53,6 +50,7 @@
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
               >
+                <!--suppress HtmlDeprecatedAttribute -->
                 <g
                   stroke-linejoin="round"
                   stroke-linecap="round"
@@ -85,9 +83,7 @@
           </div>
         </app-form-field>
 
-        <!-- Contenedor del botón con altura fija -->
         <div class="mt-6 relative w-80">
-          <!-- Mensaje de error con posición absoluta -->
           @if (isError()) {
             <div
               class="tooltip tooltip-open tooltip-error flex items-center"
@@ -95,19 +91,16 @@
             ></div>
           }
 
-          <!-- Botón con loading overlay -->
           <button
             type="submit"
             class="btn btn-primary w-full relative"
             [disabled]="loginForm.invalid || isLoading()"
           >
-            <!-- Contenido normal del botón -->
             <span [class.opacity-0]="isLoading()">
               <i class="fas fa-sign-in-alt mr-2"></i>
               Iniciar Sesión
             </span>
 
-            <!-- Loading overlay (posición absoluta) -->
             @if (isLoading()) {
               <div class="absolute inset-0 flex items-center justify-center">
                 <span class="loading loading-spinner loading-md"></span>
