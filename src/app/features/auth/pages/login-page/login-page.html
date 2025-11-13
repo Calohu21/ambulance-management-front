@@ -1,56 +1,105 @@
 <div class="min-h-screen flex items-center justify-center bg-base-200">
-  <div class="card w-full max-w-md bg-base-100 shadow-xl">
+  <div class="card w-full max-w-md bg-base-100/30 shadow-2xl">
     <div class="card-body">
-      <!-- Logo y título -->
       <div class="text-center mb-6">
         <div class="text-4xl mb-2">
           <i class="fas fa-ambulance text-primary"></i>
         </div>
-        <h1 class="text-2xl font-bold">Sistema de Ambulancias</h1>
+        <h1 class="text-2xl font-bold text-primary">Ambulance Management</h1>
         <p class="text-base-content/60">Inicia sesión para continuar</p>
       </div>
 
-      <!-- Formulario -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <!-- Email -->
-        <app-form-field label="Email" [required]="true" [error]="getFieldError('username')">
-          <input
-            type="text"
-            formControlName="username"
-            class="input input-bordered w-full"
-            placeholder="username"
-            autocomplete="username"
-          />
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col items-center">
+        <app-form-field label="Username" [required]="true" [error]="getFieldError('username')">
+          <div class="relative w-80">
+            <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
+              <svg
+                class="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </g>
+              </svg>
+            </div>
+            <input
+              type="text"
+              formControlName="username"
+              class="input validator input-bordered w-full pl-10 relative"
+              placeholder="username"
+              autocomplete="username"
+              minlength="4"
+            />
+          </div>
         </app-form-field>
 
-        <!-- Password -->
         <app-form-field label="Contraseña" [required]="true" [error]="getFieldError('password')">
-          <div class="relative">
+          <div class="relative w-80">
+            <div class="absolute left-3 top-0 h-full flex items-center pointer-events-none z-10">
+              <svg
+                class="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+                  ></path>
+                  <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                </g>
+              </svg>
+            </div>
             <input
-              [type]="showPassword() ? 'text' : 'password'"
               formControlName="password"
-              class="input input-bordered w-full pr-10"
+              class="input validator input-bordered w-full pl-10 relative"
               placeholder="••••••••"
               autocomplete="current-password"
+              minlength="6"
             />
             <button
               type="button"
               class="btn btn-ghost btn-sm absolute right-0 top-0 h-full"
-              (click)="togglePasswordVisibility()"
-            >
-              <i [class]="showPassword() ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-            </button>
+            ></button>
           </div>
         </app-form-field>
 
-        <!-- Botón submit -->
-        <div class="mt-6">
-          <button type="submit" class="btn btn-primary w-full">
-            Ingresar
-            <!--            [disabled]="loginForm.invalid || isLoading()"-->
+        <div class="mt-6 relative w-80">
+          @if (isError()) {
+            <div
+              class="tooltip tooltip-open tooltip-error flex items-center"
+              data-tip="Usuario o contraseña incorrectos"
+            ></div>
+          }
+
+          <button
+            type="submit"
+            class="btn btn-primary w-full relative"
+            [disabled]="loginForm.invalid || isLoading()"
+          >
+            <span [class.opacity-0]="isLoading()">
+              <i class="fas fa-sign-in-alt mr-2"></i>
+              Iniciar Sesión
+            </span>
+
             @if (isLoading()) {
-              <span class="loading loading-spinner"></span>
-              {{ isLoading() ? 'Iniciando...' : 'Iniciar Sesión' }}
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="loading loading-spinner loading-md"></span>
+                <span class="ml-2">Iniciando...</span>
+              </div>
             }
           </button>
         </div>
