@@ -1,10 +1,15 @@
 import { Routes } from '@angular/router';
-import { LoginPage } from './features/auth/pages/login-page/login-page';
+import { DashboardPage } from '@features/dashboard/dashboard-page/dashboard-page';
+import { LoginPage } from '@features/auth/pages/login-page/login-page';
 
 export const routes: Routes = [
   {
     path: '',
     component: LoginPage,
+  },
+  {
+    path: 'dashboard',
+    component: DashboardPage,
   },
   {
     path: 'auth',
