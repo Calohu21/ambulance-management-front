@@ -1387,6 +1387,7 @@ video {
     margin-left 0.3s ease,
     width 0.3s ease;
   overflow-x: hidden;
+  padding-top: 4.8rem; /* Space for fixed navbar */
 }
 
 @media (min-width: 768px) {

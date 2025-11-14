@@ -8,7 +8,8 @@ import { SidebarService } from '@core/services/sidebar.service';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  private sidebarService = inject(SidebarService);
+  // Expose as public so template can access it
+  sidebarService = inject(SidebarService);
 
   toggleSidebar(): void {
     this.sidebarService.toggleSidebar();
