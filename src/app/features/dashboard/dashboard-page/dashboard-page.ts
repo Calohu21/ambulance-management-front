@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { StatCard } from '@shared/components/stat-card/stat-card';
 
 @Component({
   selector: 'app-dashboard-page',
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage, StatCard],
   templateUrl: './dashboard-page.html',
 })
 export class DashboardPage {
-  isSidebarOpen = true;
   selectedDropdown: string | null = null;
   openDropdowns: { [key: string]: boolean } = {};
-
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
-
-  closeSidebar(): void {
-    this.isSidebarOpen = false;
-  }
 
   toggleDropdown(dropdownId: string): void {
     if (this.openDropdowns[dropdownId]) {
