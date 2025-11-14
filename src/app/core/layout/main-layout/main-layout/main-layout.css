@@ -1387,13 +1387,13 @@ video {
     margin-left 0.3s ease,
     width 0.3s ease;
   overflow-x: hidden;
-  padding-top: 4.8rem; /* Space for fixed navbar */
+  padding-top: 4rem; /* Space for fixed navbar */
 }
 
 @media (min-width: 768px) {
   .main {
-    margin-left: 16rem; /* 256px - sidebar width */
-    width: calc(100% - 16rem);
+    margin-left: 13rem; /* 208px - sidebar width */
+    width: calc(100% - 13rem);
   }
 
   .main.sidebar-collapsed {

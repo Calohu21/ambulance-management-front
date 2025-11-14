@@ -6,8 +6,8 @@
 /* Adjust navbar position based on sidebar state */
 @media (min-width: 768px) {
   .navbar-container {
-    left: 16rem; /* 256px - sidebar width */
-    width: calc(100% - 16rem);
+    left: 13rem; /* 208px - sidebar width */
+    width: calc(100% - 13rem);
   }
 
   .navbar-container.sidebar-collapsed {
@@ -22,4 +22,8 @@
     left: 0;
     width: 100%;
   }
+}
+
+button {
+  cursor: pointer;
 }
