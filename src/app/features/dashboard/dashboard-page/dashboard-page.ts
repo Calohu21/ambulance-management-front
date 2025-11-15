@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { StatCard } from '@shared/components/stat-card/stat-card';
 
 @Component({
   selector: 'app-dashboard-page',
-  imports: [CommonModule, NgOptimizedImage, StatCard],
+  imports: [CommonModule, StatCard],
   templateUrl: './dashboard-page.html',
 })
 export class DashboardPage {
@@ -15,7 +15,6 @@ export class DashboardPage {
     if (this.openDropdowns[dropdownId]) {
       this.openDropdowns[dropdownId] = false;
     } else {
-      // Close all other dropdowns
       Object.keys(this.openDropdowns).forEach((key) => {
         this.openDropdowns[key] = false;
       });
