@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { EmployeeModel } from '@features/employees/models/employee.model';
 
 @Component({
   selector: 'app-data-table',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styles: ``,
 })
 export class DataTable {
-
+  employees = input<EmployeeModel[]>();
 }
