@@ -12,4 +12,14 @@ export class StorageService {
       console.error('Error saving to localStorage', error);
     }
   }
+
+  get<T>(key: string): T | null {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : null;
+    } catch (error) {
+      console.error('Error reading to localStorage');
+      return null;
+    }
+  }
 }

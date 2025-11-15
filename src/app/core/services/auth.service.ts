@@ -18,10 +18,13 @@ export class AuthService {
 
   private currentUserCache = signal<User | null>(null);
 
+  constructor() {
+    this.loadStoredAuth();
+  }
+
   login(credentials: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(AUTH_ENDPOINTS.LOGIN, credentials).pipe(
       tap((response) => this.handleAuthSuccess(response)),
-      tap((resp) => console.log(resp)),
       catchError((err) => {
         console.error('Login error:', err);
         return throwError(() => err);
@@ -45,5 +48,13 @@ export class AuthService {
 
     this.currentUserCache.set(user);
     this.storage.set(STORAGE_KEYS.USER_INFO, user);
+  }
+
+  loadStoredAuth() {
+    const storedToken = this.storage.get<string>(STORAGE_KEYS.JWT_TOKEN);
+
+    if (storedToken) {
+      this.tokenCache.set(storedToken);
+    }
   }
 }
