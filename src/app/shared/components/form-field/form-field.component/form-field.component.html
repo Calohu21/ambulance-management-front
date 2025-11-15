@@ -3,7 +3,7 @@
     <span class="label-text">
       {{ label() }}
       @if (required()) {
-        <span class="text-error ml-1"></span>
+        <span class="text-red-600 ml-1"></span>
       }
     </span>
   </label>
@@ -13,7 +13,7 @@
   <div class="h-3">
     @if (error()) {
       <div class="label py-0 animate-fade-in">
-        <span class="label-text-alt text-error text-sm flex items-center">
+        <span class="label-text-alt text-red-600 text-sm flex items-center">
           <i class="fas fa-exclamation-circle mr-1"></i>
           {{ error() }}
         </span>
