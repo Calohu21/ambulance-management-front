@@ -1,0 +1,30 @@
+/* Custom styles for collapsible sidebar */
+.sidebar-menu {
+  transition: width 0.3s ease;
+}
+
+.sidebar-menu.collapsed {
+  width: 4rem; /* 64px - w-16 */
+}
+
+.sidebar-menu.collapsed .sidebar-text,
+.sidebar-menu.collapsed .sidebar-logo-text,
+.sidebar-menu.collapsed .sidebar-arrow,
+.sidebar-menu.collapsed .sidebar-section-title {
+  display: none;
+}
+
+.sidebar-menu.collapsed ul ul {
+  display: none !important;
+}
+
+.sidebar-menu.collapsed .sidebar-link {
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.sidebar-menu.collapsed .sidebar-link i {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}

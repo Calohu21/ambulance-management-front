@@ -1,0 +1,29 @@
+/* Navbar always fixed at top */
+.navbar-container {
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+/* Adjust navbar position based on sidebar state */
+@media (min-width: 768px) {
+  .navbar-container {
+    left: 13rem; /* 208px - sidebar width */
+    width: calc(100% - 13rem);
+  }
+
+  .navbar-container.sidebar-collapsed {
+    left: 4rem; /* 64px - collapsed sidebar */
+    width: calc(100% - 4rem);
+  }
+}
+
+/* On mobile, navbar takes full width */
+@media (max-width: 767px) {
+  .navbar-container {
+    left: 0;
+    width: 100%;
+  }
+}
+
+.navbar-container button {
+  cursor: pointer;
+}
