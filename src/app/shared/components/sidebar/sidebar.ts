@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { SidebarService } from '@core/services/sidebar.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
   private sidebarService = inject(SidebarService);
 
-  // Expose signals for template
   isSidebarOpen = this.sidebarService.isSidebarOpen;
   openDropdowns = this.sidebarService.openDropdowns;
 
