@@ -13,8 +13,8 @@ export interface TableAction<T> {
   icon?: string;
   variant?: 'primary' | 'secondary' | 'error' | 'warning' | 'success';
   action: (item: T) => void;
-  disabled?: (item: T) => void;
-  hidden?: (item: T) => void;
+  disabled?: (item: T) => boolean;
+  hidden?: (item: T) => boolean;
 }
 
 type SortDirection = 'asc' | 'desc' | null;
@@ -83,5 +83,56 @@ export class DataTableComponent<T extends Record<string, any>> {
     }
 
     return value;
+  }
+
+  onSort(columnKey: string | keyof T) {
+    const key = String(columnKey);
+
+    if (this.sortColumn() === key) {
+      if (this.sortDirection() === 'asc') {
+        this.sortDirectionCache.set('desc');
+      } else if (this.sortDirection() === 'desc') {
+        this.sortColumnCache.set(null);
+        this.sortDirectionCache.set(null);
+      }
+    } else {
+      this.sortColumnCache.set(key);
+      this.sortDirectionCache.set('asc');
+    }
+  }
+
+  onRowClick(item: T) {
+    if (this.clickableRows()) {
+      this.rowClicked.emit(item);
+    }
+  }
+
+  formatValue(item: T, colum: TableColum<T>): string {
+    const value = this.getNestedValue(item, colum.key);
+
+    if (colum.pipe) {
+      return colum.pipe(value);
+    }
+
+    return value != null ? String(value) : '-';
+  }
+
+  getVisibleActions(item: T): TableAction<T>[] {
+    return (
+      this.actions()?.filter((action) => {
+        return !action.hidden || !action.hidden(item);
+      }) || []
+    );
+  }
+
+  isActionDisabled(action: TableAction<T>, item: T): boolean {
+    return action.disabled ? action.disabled(item) : false;
+  }
+
+  trackByFn(index: number, item: T): any {
+    if (this.trackBy()) {
+      return item[this.trackBy()!];
+    }
+    return index;
   }
 }
