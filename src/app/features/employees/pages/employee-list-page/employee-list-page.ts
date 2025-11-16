@@ -1,10 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { EmployeeService } from '@features/employees/services/employee.service';
-import { DataTable } from '@shared/components/data-table/data-table';
+import { DataTableComponent } from '@shared/components/data-table/data-table.component';
 
 @Component({
   selector: 'app-employee-list-page',
-  imports: [DataTable],
+  imports: [DataTableComponent],
   templateUrl: './employee-list-page.html',
   styles: ``,
 })
